@@ -139,6 +139,17 @@ class Usuario {
 		));
 	}
 
+	public function delete() {
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM db_usuarios WHERE idusuario = :ID", array(':ID'=>$this->getIdusuario()));
+
+		$this->setIdusuario(0);
+		$this->setDeslogin("");
+		$this->setDessenha("");
+		$this->setDtcadastro(new DateTime());
+	}
+
 	public function __toString() {
 		return json_encode(array(
 			"id" => $this->getIdusuario(),
